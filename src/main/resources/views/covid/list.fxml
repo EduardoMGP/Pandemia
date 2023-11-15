@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.web.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="1165.0" maxWidth="780.0" minHeight="645.0" minWidth="780.0" prefHeight="1165.0" prefWidth="780.0" styleClass="body" stylesheets="@../../styles/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.pandemia.info.controllers.covid.CovidListController">
+   <children>
+      <Label layoutX="24.0" layoutY="24.0" text="Casos de Covid-19">
+         <font>
+            <Font name="Corbel Light" size="20.0" />
+         </font>
+      </Label>
+      <Pane layoutX="24.0" layoutY="60.0" prefHeight="145.0" prefWidth="350.0" styleClass="card" AnchorPane.leftAnchor="30.0">
+         <children>
+            <Label layoutX="14.0" layoutY="14.0" styleClass="title" text="CASOS CONFIRMADOS" />
+            <Label layoutX="14.0" layoutY="39.0" prefHeight="36.0" prefWidth="166.0" text="37.994.356">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="69.0" text="Acumulado">
+               <font>
+                  <Font name="Corbel Light" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="184.0" layoutY="39.0" prefHeight="36.0" prefWidth="166.0" text="+37">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="184.0" layoutY="69.0" text="Novos casos">
+               <font>
+                  <Font name="Corbel Light" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="419.0" layoutY="60.0" prefHeight="145.0" prefWidth="350.0" styleClass="card" AnchorPane.rightAnchor="30.0">
+         <children>
+            <Label layoutX="14.0" layoutY="14.0" styleClass="title" text="ÓBITOS CONFIRMADOS" />
+            <Label layoutX="10.0" layoutY="39.0" prefHeight="36.0" prefWidth="166.0" text="706.986">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="13.0" layoutY="67.0" text="Óbitos acumulados">
+               <font>
+                  <Font name="Corbel Light" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="184.0" layoutY="39.0" prefHeight="36.0" prefWidth="166.0" text="0">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="184.0" layoutY="67.0" text="Novos óbitos">
+               <font>
+                  <Font name="Corbel Light" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="84.0" prefHeight="36.0" prefWidth="166.0" text="1,9%">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="20.0" layoutY="112.0" text="Letalidade">
+               <font>
+                  <Font name="Corbel Light" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Label layoutX="30.0" layoutY="720.0" prefHeight="35.0" prefWidth="269.0" text="Casos confirmados no ultimo mês">
+         <font>
+            <Font name="Corbel Light" size="20.0" />
+         </font>
+      </Label>
+      <WebView fx:id="webView" layoutX="30.0" layoutY="287.0" prefHeight="424.0" prefWidth="667.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
+      <Label layoutX="30.0" layoutY="252.0" prefHeight="35.0" text="Mapa de incidência da Covid-19 na cidade">
+         <font>
+            <Font name="Corbel Light" size="20.0" />
+         </font>
+      </Label>
+      <LineChart fx:id="chart" layoutX="30.0" layoutY="755.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </LineChart>
+   </children>
+</AnchorPane>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
+             version="2.2">
+    <persistence-unit name="pandemia" transaction-type="RESOURCE_LOCAL">
+        <properties>
+            <property name="jakarta.persistence.jdbc.url"
+                      value="jdbc:mariadb://db.uaibits.com.br/pandemia"/>
+<!--            <property name="hibernate.dialect" value="org.hibernate.dialect.MariaDB106Dialect"/>-->
+            <property name="jakarta.persistence.jdbc.user" value="pandemia"/>
+            <property name="jakarta.persistence.jdbc.password" value="Iv9zai/qS4J72]6y"/>
+<!--            <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>-->
+
+
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.highlight_sql" value="true"/>
+
+        </properties>
+    </persistence-unit>
+</persistence>

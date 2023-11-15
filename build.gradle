@@ -1,0 +1,68 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
+}
+
+
+repositories {
+    mavenCentral()
+}
+
+group = "org.pandemia.info"
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = JavaVersion.VERSION_20
+targetCompatibility = JavaVersion.VERSION_20
+compileJava.options.encoding = 'UTF-8'
+
+application {
+    mainClass = "org.pandemia.info.PandemicApplication"
+}
+
+javafx {
+    version = '17'
+    modules = ['javafx.controls', 'javafx.fxml', 'javafx.web']
+}
+
+jar {
+    configurations {
+        compileCustomLibrary
+//        compileCustomLibrary.extendsFrom(implementation)
+    }
+
+    manifest {
+        attributes 'Main-Class': 'org.pandemia.info.PandemicApplication'
+        from {
+            duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+            configurations.compileCustomLibrary.collect { it.isDirectory() ? it : zipTree(it) }
+        }
+    }
+}
+
+dependencies {
+    implementation('org.controlsfx:controlsfx:11.1.2')
+    implementation('org.projectlombok:lombok:1.18.30')
+    implementation('org.mariadb.jdbc:mariadb-java-client:3.2.0')
+    implementation 'org.hibernate:hibernate-core-jakarta:5.6.15.Final'
+
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+
+    // Compilando o jar com todas as dependências dentro
+    compileCustomLibrary 'org.controlsfx:controlsfx:11.1.2'
+    compileCustomLibrary 'org.projectlombok:lombok:1.18.30'
+    compileCustomLibrary 'org.mariadb.jdbc:mariadb-java-client:3.2.0'
+    compileCustomLibrary 'org.hibernate:hibernate-core-jakarta:5.6.15.Final'
+}
+
+// Movendo arquivos de recursos para o diretório de saída onde esta o jar para que o
+// mapeamento automático do hibernate funcione, porque por padrão o gradle separa
+// os arquivos de recursos do diretório de codigo fonte
+sourceSets {
+    main {
+        resources {
+            srcDirs = ['src/main/resources'] // Diretório de recursos padrão
+            output.resourcesDir = 'build/classes/java/main' // Diretório de saída
+        }
+    }
+}
