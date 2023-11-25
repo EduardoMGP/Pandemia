@@ -34,7 +34,7 @@ public class CovidViewController implements Initializable {
     }
 
     public void graph() {
-        List<CovidCount> cases = CovidCase.getCasesByDate(Utils.nowDecrementedFormat(30), Utils.formatNowDate());
+        List<CovidCount> cases = CovidCount.getCountBetweenDates(Utils.nowDecrementedFormat(30), Utils.formatNowDate());
         XYChart.Series<String, Integer> series = new XYChart.Series<>();
         for (CovidCount covidCount : cases)
             series.getData().add(new XYChart.Data<>(Utils.formatDate(covidCount.getDate()), covidCount.getConfirmed()));
@@ -48,7 +48,7 @@ public class CovidViewController implements Initializable {
         webEngine.setJavaScriptEnabled(true);
         webEngine.load(Objects.requireNonNull(PandemicApplication.class.getResource("/map/index.html")).toExternalForm());
 
-        List<CovidCase> cases = CovidCase.getCases(Utils.nowDecrementedFormat(30), Utils.formatNowDate());
+        List<CovidCase> cases = CovidCase.getCasesBetweenDate(Utils.nowDecrementedFormat(30), Utils.formatNowDate());
         StringBuilder objects = new StringBuilder("[");
         for (CovidCase covidCase : cases) {
             Neighborhood neighborhood = covidCase.getNeighborhood();
@@ -66,7 +66,7 @@ public class CovidViewController implements Initializable {
 
     public void cards() {
 
-        CovidCount count = CovidCase.getCasesCount(Utils.nowDecrementedFormat(30), Utils.nowDate);
+        CovidCount count = CovidCount.getCasesCount(Utils.nowDecrementedFormat(30), Utils.formatNowDate());
 
         confirmedTotal.setText(String.valueOf(count.getConfirmed_total()));
         confirmed.setText("+" + count.getConfirmed());

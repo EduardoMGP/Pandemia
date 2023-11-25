@@ -8,6 +8,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.stage.Stage;
 import org.pandemia.info.database.ConnectionJPA;
 import org.pandemia.info.database.models.User;
+import org.pandemia.info.database.models.enums.Role;
 
 import java.io.IOException;
 import java.net.URL;
@@ -25,6 +26,17 @@ public class PandemicApplication extends Application {
 
     public static void setUser(User user) {
         PandemicApplication.user = user;
+
+        try {
+            URL page = user == null ? PandemicApplication.class.getResource("/views/auth/login.fxml") : PandemicApplication.class.getResource("/views/index.fxml");
+            if (page == null) throw new IOException("Page not found");
+            scene.setRoot(FXMLLoader.load(page));
+            if (user != null && (user.getRole() == Role.NURSE || user.getRole() == Role.ADMIN))
+                openPage("dashboard");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public static void navigate(String pageName) {
@@ -71,16 +83,14 @@ public class PandemicApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        setUser(new User().findById(User.class, 1));
-        FXMLLoader fxmlLoader = new FXMLLoader(PandemicApplication.class.getResource("/views/index.fxml"));
-//        FXMLLoader fxmlLoader = new FXMLLoader(PandemicApplication.class.getResource("/views/auth/login.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(PandemicApplication.class.getResource("/views/auth/login.fxml"));
         scene = new Scene(fxmlLoader.load(), 800, 600);
-        stage.setTitle("Hello!");
+
+        stage.setResizable(false);
+        stage.setFullScreen(false);
+        stage.setTitle("Pandemia");
         stage.setScene(scene);
         stage.show();
-
-        PandemicApplication.openPage("case");
-
     }
 
     public static void main(String[] args) {

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="body" maxHeight="550.0" maxWidth="795.0" minHeight="550.0" minWidth="795.0" prefHeight="550.0" prefWidth="795.0" styleClass="body" stylesheets="@../../styles/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.pandemia.info.controllers.NeighborhoodAddController">
+    <children>
+        <Button fx:id="btnRegister" layoutX="607.0" layoutY="501.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="174.0" styleClass="btn" text="Salvar bairro" />
+        <Label layoutX="14.0" layoutY="14.0" text="Cadastro de bairros">
+            <font>
+                <Font name="Corbel Light" size="20.0" />
+            </font>
+        </Label>
+        <Label layoutX="14.0" layoutY="49.0" prefHeight="30.0" prefWidth="328.0" text="Nome do bairro" />
+        <TextField fx:id="inputName" layoutX="14.0" layoutY="79.0" prefHeight="35.0" prefWidth="370.0" promptText="Nome do bairro" />
+      <TextField fx:id="inputLat" layoutX="14.0" layoutY="146.0" prefHeight="35.0" prefWidth="370.0" promptText="Ex: -21.254871798868443" AnchorPane.leftAnchor="14.0" />
+      <Label layoutX="15.0" layoutY="114.0" prefHeight="30.0" prefWidth="328.0" text="Latitude" AnchorPane.leftAnchor="15.0" />
+      <TextField fx:id="inputLng" layoutX="443.0" layoutY="146.0" prefHeight="35.0" prefWidth="370.0" promptText="Ex: -43.161681003037806" AnchorPane.rightAnchor="15.0" />
+      <Label layoutX="410.0" layoutY="118.0" prefHeight="30.0" prefWidth="328.0" text="Longitude" />
+      <ChoiceBox fx:id="selectCity" layoutX="410.0" layoutY="79.0" prefHeight="35.0" prefWidth="257.0" />
+      <Label layoutX="410.0" layoutY="49.0" prefHeight="30.0" prefWidth="121.0" text="Cidade" AnchorPane.leftAnchor="410.0" />
+      <Label layoutX="681.0" layoutY="49.0" prefHeight="30.0" prefWidth="89.0" text="Estado" />
+      <ChoiceBox fx:id="selectState" layoutX="681.0" layoutY="79.0" prefHeight="35.0" prefWidth="99.0" />
+    </children>
+</AnchorPane>

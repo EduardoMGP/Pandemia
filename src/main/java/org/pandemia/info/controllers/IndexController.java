@@ -1,16 +1,21 @@
 package org.pandemia.info.controllers;
 
-import javafx.scene.control.Label;
+import javafx.scene.control.Hyperlink;
 import org.pandemia.info.PandemicApplication;
 import org.pandemia.info.database.models.User;
+import org.pandemia.info.database.models.enums.Role;
 
 public class IndexController {
 
 
-    public Label name;
+    public Hyperlink dashboard;
 
     public void initialize() {
         User user = PandemicApplication.getUser();
+        dashboard.setVisible(user != null && (user.getRole() == Role.ADMIN || user.getRole() == Role.NURSE));
+        dashboard.onActionProperty().setValue(event -> {
+            PandemicApplication.openPage("dashboard");
+        });
     }
 
     public void logout() {

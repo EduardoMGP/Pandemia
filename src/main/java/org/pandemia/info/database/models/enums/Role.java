@@ -6,7 +6,22 @@ public enum Role {
     ADMIN("admin"),
     NURSE("nurse");
 
-    Role( String role) {
+    private final String name;
+
+    Role(String role) {
+        this.name = role;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public static Role fromString(String text) {
+        for (Role role : Role.values()) {
+            if (role.name.equalsIgnoreCase(text)) {
+                return role;
+            }
+        }
+        return null;
+    }
 }

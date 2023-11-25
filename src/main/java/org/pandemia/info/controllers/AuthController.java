@@ -20,6 +20,11 @@ public class AuthController {
     public Timer timerAlert;
 
 
+    public void initialize() {
+        email.setText("carlos@mail.com");
+        password.setText("123");
+    }
+
     public void registerPage() {
         // TODO implement here
         PandemicApplication.navigate("auth/register");
@@ -39,9 +44,8 @@ public class AuthController {
     }
 
     public void login() {
-        if (User.validate(email.getText(), password.getText())) {
-            PandemicApplication.navigate("home");
-        } else alert("Usuário ou senha incorretos!");
+        if (!User.validate(email.getText(), password.getText()))
+            alert("Usuário ou senha incorretos!");
     }
 
     private void alert(String message) {

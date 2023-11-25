@@ -210,13 +210,27 @@
             center: new google.maps.LatLng(-21.256934, -43.161737),
             zoom: 15,
         });
-
     }
 
-    addMarkers =  function (heatmapData) {
+    addMarkers = function (data) {
+
+        let heatmapData = [];
+        for (let i = 0; i < data.length; i++) {
+            let contains = heatmapData.some(function (el) {
+                return el.lat() === data[i].lat && el.lng() === data[i].lng;
+            });
+
+            if (contains) {
+                data[i].lat = data[i].lat + Math.random() / 1000;
+                data[i].lng = data[i].lng + Math.random() / 1000;
+            }
+            heatmapData.push(new google.maps.LatLng(data[i].lat, data[i].lng));
+        }
+
         var heatmap = new google.maps.visualization.HeatmapLayer({
             data: heatmapData
         });
+
         heatmap.setMap(map);
     }
 </script>

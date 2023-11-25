@@ -15,3 +15,59 @@
 .body {
     -fx-background-color: #f3faf8;
 }
+.btn {
+    -fx-background-color: #29aa8b;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 12;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+
+.btn:hover {
+    -fx-background-color: #1e7f66;
+    -fx-effect: dropshadow(three-pass-box, rgba(41,170,139,.25), 4, 1, 0, 0);
+}
+
+.btn-danger {
+    -fx-background-color: #e74c3c;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 12;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+}
+
+.btn-danger:hover {
+    -fx-background-color: #c0392b;
+}
+
+.btn-edit {
+    -fx-background-color: #f39c12;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 12;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+}
+
+.btn-edit:hover {
+    -fx-background-color: #d68910;
+}
+
+.dialog .content {
+    -fx-padding: 0;
+}
+
+TextField, PasswordField, ChoiceBox, DatePicker {
+    -fx-background-color: white;
+    -fx-border-color: #29aa8b;
+    -fx-prompt-text-fill: #29aa8b;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5;
+}
+
+TextField:focused, PasswordField:focused, ChoiceBox:focused, DatePicker:focused {
+    -fx-border-color: #1e7f66;
+    -fx-effect: dropshadow(three-pass-box, rgba(41,170,139,.25), 3, 1, 0, 0);
+}

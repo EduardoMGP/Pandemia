@@ -1,35 +1,37 @@
-package org.pandemia.info.controllers.covid;
+package org.pandemia.info.controllers;
 
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import org.pandemia.info.tables.CovidTableView;
 import org.pandemia.info.Pagination;
 import org.pandemia.info.PandemicApplication;
 import org.pandemia.info.database.models.CovidCase;
-
+import org.pandemia.info.database.models.Neighborhood;
+import org.pandemia.info.tables.NeighborhoodTableView;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class CovidListController implements Initializable {
+public class NeighborhoodListController implements Initializable {
 
+    public Button btnAdd;
     public TextField search;
-    public Button btnCovid;
-    public Button btnSearch;
-    public TableView<CovidCase> table;
+    public TableView<Neighborhood> table;
     public Pane pagination;
+    public Button btnSearch;
 
-    private CovidTableView covidTableView;
+    private NeighborhoodTableView neighborhoodTableView;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        btnCovid.setOnAction(event -> {
-            PandemicApplication.openPage("covid/add");
+        btnAdd.setOnAction(event -> {
+            PandemicApplication.openPage("neighborhood/add");
         });
 
 
-        covidTableView = new CovidTableView(table);
+        neighborhoodTableView = new NeighborhoodTableView(table);
 
         search.setOnKeyPressed(event -> {
             if (event.getCode().toString().equals("ENTER")) {
@@ -44,10 +46,10 @@ public class CovidListController implements Initializable {
 
     private void updateTable() {
         String searchTerm = search.getText();
-        int count = CovidCase.getCasesCount(searchTerm);
+        int count = Neighborhood.getCount(searchTerm);
         int pages = (int) Math.ceil(count / (double) 14);
         Pagination.paginate(pagination, pages, page -> {
-            covidTableView.setItems(CovidCase.getAllCases(page - 1, 14, searchTerm));
+            neighborhoodTableView.setItems(Neighborhood.getAll(page - 1, 14, searchTerm));
         });
     }
 }

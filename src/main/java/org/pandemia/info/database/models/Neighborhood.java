@@ -3,8 +3,6 @@ package org.pandemia.info.database.models;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.checkerframework.checker.units.qual.min;
-import org.hibernate.annotations.ManyToAny;
 import org.pandemia.info.database.dao.NeighborgoodDAO;
 
 import java.util.List;
@@ -13,7 +11,7 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "neighborhoods")
-public class Neighborhood extends IModel {
+public class Neighborhood extends NeighborgoodDAO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,8 +46,4 @@ public class Neighborhood extends IModel {
 
     @ManyToMany(mappedBy = "neighborhoods")
     private List<User> users;
-
-    public Neighborhood() {
-        super(new NeighborgoodDAO());
-    }
 }

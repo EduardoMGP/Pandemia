@@ -1,23 +1,28 @@
 package org.pandemia.info.database.dao;
 
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Query;
 import org.pandemia.info.database.ConnectionJPA;
 import org.pandemia.info.database.ITransaction;
-import org.pandemia.info.database.models.IModel;
 import org.pandemia.info.exceptions.TransactionException;
 
 import java.util.List;
 
 public abstract class DAOMySql implements IDao {
 
-    public void update(IModel model) {
-        DAOMySql.inTransaction((manager) -> manager.merge(model));
+    public void update() {
+        DAOMySql.inTransaction((manager) -> manager.merge(this));
     }
 
-    public boolean delete(IModel model) {
-        return DAOMySql.inTransaction((manager) -> manager.remove(model));
+    public boolean delete() {
+        return DAOMySql.inTransaction((manager) -> {
+            try {
+                Object entity = manager.find(getClass(), getClass().getMethod("getId").invoke(this));
+                manager.remove(entity);
+            } catch (Exception e) {
+                throw new TransactionException("Não foi possível encontrar o objeto para deletar");
+            }
+        });
     }
 
     public <T> T findById(Class<T> model, Object id) {
@@ -67,23 +72,23 @@ public abstract class DAOMySql implements IDao {
 
     }
 
-    public void save(IModel model) {
+    public void save() {
         DAOMySql.inTransaction((manager) -> {
             //Se o objeto existir no entityManager significa que ele não está transiente
             //e portanto deve ser atualizado no banco de dados ao invés de persistido
 
             try {
 
-                Object id = model.getClass().getMethod("getId").invoke(model);
+                Object id = getClass().getMethod("getId").invoke(this);
                 if (id != null)
-                    manager.merge(model);
+                    manager.merge(this);
                 else {
 
-                    Class<?> modelClass = model.getClass();
-                    if (model.findById(modelClass, id) != null) {
-                        manager.merge(model);
+                    Class<?> modelClass = getClass();
+                    if (this.findById(modelClass, id) != null) {
+                        manager.merge(this);
                     } else {
-                        manager.persist(model);
+                        manager.persist(this);
                     }
 
                 }
@@ -111,5 +116,9 @@ public abstract class DAOMySql implements IDao {
             }
         }
         return false;
+    }
+
+    public void refresh() {
+        DAOMySql.inTransaction((manager) -> manager.refresh(this));
     }
 }

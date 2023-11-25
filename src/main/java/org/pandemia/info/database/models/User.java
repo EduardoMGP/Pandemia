@@ -3,19 +3,16 @@ package org.pandemia.info.database.models;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 import org.pandemia.info.PandemicApplication;
 import org.pandemia.info.database.dao.UserDAO;
 import org.pandemia.info.database.models.enums.Role;
-
 import java.util.List;
 
-@ToString
 @Getter
 @Setter
 @Entity
 @Table(name = "users")
-public class User extends IModel {
+public class User extends UserDAO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -59,12 +56,12 @@ public class User extends IModel {
     )
     private List<Vaccine> vaccines;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private List<CovidCase> covidCases;
 
     public User() {
-        super(new UserDAO());
+
     }
 
     public User(String name, String email, String password, Role role) {
@@ -117,5 +114,10 @@ public class User extends IModel {
         PandemicApplication.setUser(user);
 
         return true;
+    }
+
+    public void addCovidCase(CovidCase covidCase) {
+        covidCases.add(covidCase);
+        save();
     }
 }

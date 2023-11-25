@@ -5,8 +5,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.pandemia.info.controllers.AuthController">
+<AnchorPane styleClass="body" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.pandemia.info.controllers.AuthController"  stylesheets="@../../styles/style.css" >
    <Pane layoutX="15.0" layoutY="15.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0"
          AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
       <padding>
@@ -20,7 +20,7 @@
 
       <TextField fx:id="email" layoutX="385.0" layoutY="260.0" prefHeight="35.0" prefWidth="340.0"
                  promptText="E-mail"/>
-      <Button layoutX="617.0" layoutY="379.0" mnemonicParsing="false" text="Realizar Cadastro" onAction="#register"/>
+      <Button layoutX="617.0" layoutY="379.0" mnemonicParsing="false" text="Realizar Cadastro" onAction="#register" styleClass="btn"/>
       <Label layoutX="385.0" layoutY="305.0" prefHeight="17.0" prefWidth="340.0" text="Senha"/>
       <PasswordField fx:id="password" layoutX="385.0" layoutY="328.0" prefHeight="35.0" prefWidth="340.0"
                      promptText="Senha"/>

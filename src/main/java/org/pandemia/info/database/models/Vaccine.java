@@ -11,7 +11,7 @@ import org.pandemia.info.database.dao.VaccineDAO;
 @Setter
 @Entity
 @Table(name = "vaccines")
-public class Vaccine extends IModel {
+public class Vaccine extends VaccineDAO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,8 +44,4 @@ public class Vaccine extends IModel {
     @Column(columnDefinition = "TIMESTAMP NULL DEFAULT NULL")
     private String deleted_at;
 
-
-    public Vaccine() {
-        super(new VaccineDAO());
-    }
 }

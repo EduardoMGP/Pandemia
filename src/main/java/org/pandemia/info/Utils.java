@@ -1,14 +1,21 @@
 package org.pandemia.info;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Optional;
 
 public class Utils {
 
-    public static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-    public static Calendar nowCalendar = Calendar.getInstance();
-    public static String nowDate = formatDate(nowCalendar);
+    private static final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+    private static final Calendar nowCalendar = Calendar.getInstance();
+    private static final String nowDate = formatDate(nowCalendar);
+
+    public static Date now() {
+        return nowCalendar.getTime();
+    }
 
     public static String formatDate(Calendar calendar) {
         return formatDate(calendar.getTime());
@@ -40,5 +47,26 @@ public class Utils {
 
     public static String nowDecrementedFormat(int days) {
         return formatDate(nowDecremented(days));
+    }
+
+
+    public static Optional<ButtonType> showAlert(String title, String header, String message, Alert.AlertType type) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(message);
+        return alert.showAndWait();
+    }
+
+    public static void showConfirm(String message, AlertExec exec) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmação");
+        alert.setHeaderText("");
+        alert.setContentText(message);
+        alert.showAndWait().ifPresent(buttonType -> {
+            if (buttonType.equals(ButtonType.OK)) {
+                exec.execute();
+            }
+        });
     }
 }
