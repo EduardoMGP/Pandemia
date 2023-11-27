@@ -71,3 +71,13 @@ TextField:focused, PasswordField:focused, ChoiceBox:focused, DatePicker:focused 
     -fx-border-color: #1e7f66;
     -fx-effect: dropshadow(three-pass-box, rgba(41,170,139,.25), 3, 1, 0, 0);
 }
+
+.btnInputSearch {
+    -fx-background-color: #29aa8b;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 12;
+    -fx-background-radius: 0 5 5 0;
+    -fx-border-width: 0;
+    -fx-max-height: 34;
+}

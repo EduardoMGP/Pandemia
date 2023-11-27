@@ -59,7 +59,6 @@ public class CovidViewController implements Initializable {
         webView.getEngine().getLoadWorker().stateProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue == javafx.concurrent.Worker.State.SUCCEEDED) {
                 webView.getEngine().executeScript("addMarkers(" + objects + ")");
-                System.out.println("Map loaded " + objects);
             }
         });
     }

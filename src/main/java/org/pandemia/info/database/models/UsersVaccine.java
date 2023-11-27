@@ -10,30 +10,24 @@ import org.pandemia.info.database.dao.VaccineDAO;
 @Getter
 @Setter
 @Entity
-@Table(name = "vaccines")
-public class Vaccine extends VaccineDAO {
+@Table(name = "users_vaccines")
+public class UsersVaccine extends VaccineDAO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(nullable = false, length = 100, columnDefinition = "VARCHAR(100)")
-    private String name;
+    @Column(nullable = false, columnDefinition = "INT")
+    private int user_id;
 
     @Column(nullable = false, columnDefinition = "INT")
-    private int stock;
+    private int vaccine_id;
 
-    @Column(nullable = false, length = 100, columnDefinition = "VARCHAR(100)")
-    private String batch;
-
-    @Column(nullable = false, length = 100, columnDefinition = "VARCHAR(100)")
-    private String manufacturer;
+    @Column(nullable = false, columnDefinition = "INT")
+    private int dose;
 
     @Column(nullable = false, columnDefinition = "DATE")
-    private String expiration_date;
-
-    @Column(nullable = false, columnDefinition = "DATE")
-    private String fabrication_date;
+    private String date;
 
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private String created_at;
@@ -43,4 +37,12 @@ public class Vaccine extends VaccineDAO {
 
     @Column(columnDefinition = "TIMESTAMP NULL DEFAULT NULL")
     private String deleted_at;
+
+    @ManyToOne()
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    private User user;
+
+    @ManyToOne()
+    @JoinColumn(name = "vaccine_id", insertable = false, updatable = false)
+    private Vaccine vaccine;
 }

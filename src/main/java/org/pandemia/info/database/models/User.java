@@ -48,13 +48,9 @@ public class User extends UserDAO {
     )
     private List<Neighborhood> neighborhoods;
 
-    @ManyToMany()
-    @JoinTable(
-            name = "users_vaccines",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "vaccine_id")
-    )
-    private List<Vaccine> vaccines;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private List<UsersVaccine> usersVaccines;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="body" maxHeight="550.0" maxWidth="795.0" minHeight="550.0" minWidth="795.0" prefHeight="550.0" prefWidth="795.0" styleClass="body" stylesheets="@../../../styles/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.pandemia.info.controllers.VaccineAppliedListController">
+   <children>
+      <Label layoutX="14.0" layoutY="14.0" text="Lista de moradores vacinados">
+         <font>
+            <Font name="Corbel Light" size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnAdd" layoutX="630.0" layoutY="19.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="150.0" styleClass="btn" text="Registrar nova vacinação" />
+      <TextField fx:id="search" layoutX="15.0" layoutY="73.0" prefHeight="31.0" prefWidth="608.0" promptText="Busque por nome, email ou nome da vacina" />
+      <TableView fx:id="table" layoutX="18.0" layoutY="131.0" prefHeight="366.0" prefWidth="765.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" />
+      <Pane fx:id="pagination" layoutX="14.0" layoutY="503.0" prefHeight="37.0" prefWidth="765.0" />
+      <Button fx:id="btnSearch" layoutX="630.0" layoutY="73.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="150.0" text="Buscar" />
+   </children>
+</AnchorPane>

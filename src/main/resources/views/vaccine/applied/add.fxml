@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="body" maxHeight="550.0" maxWidth="795.0" minHeight="550.0" minWidth="795.0" prefHeight="550.0" prefWidth="795.0" styleClass="body" stylesheets="@../../../styles/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.pandemia.info.controllers.VaccineAppliedAddController">
+   <children>
+      <DatePicker fx:id="inputDate" layoutX="354.0" layoutY="79.0" prefHeight="35.0" prefWidth="228.0" />
+      <Button fx:id="btnRegister" layoutX="607.0" layoutY="501.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="174.0" styleClass="btn" text="Registrar vacina" />
+      <Label layoutX="14.0" layoutY="14.0" text="Cadastro vacinação">
+         <font>
+            <Font name="Corbel Light" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="49.0" prefHeight="30.0" prefWidth="47.0" text="Morador" />
+      <Label layoutX="355.0" layoutY="49.0" prefHeight="30.0" prefWidth="189.0" text="Data da vacinação" />
+      <TextField fx:id="inputName" layoutX="14.0" layoutY="79.0" prefHeight="35.0" prefWidth="328.0" promptText="Pesquise por um nome ou email" />
+      <Label layoutX="592.0" layoutY="49.0" prefHeight="30.0" prefWidth="77.0" text="Dose" />
+      <ChoiceBox fx:id="vaccine" layoutX="14.0" layoutY="149.0" prefHeight="35.0" prefWidth="328.0" />
+      <Label layoutX="14.0" layoutY="117.0" prefHeight="30.0" prefWidth="47.0" text="Vacina" />
+      <ScrollPane fx:id="searchArea" layoutX="13.0" layoutY="118.0" prefHeight="200.0" prefWidth="328.0" visible="false">
+         <content>
+            <ListView fx:id="searchList" prefHeight="198.0" prefWidth="326.0" />
+         </content>
+      </ScrollPane>
+      <TextField fx:id="inputDose" layoutX="592.0" layoutY="79.0" prefHeight="35.0" prefWidth="189.0" promptText="Numero da dose" />
+      <Button fx:id="btnSearch" layoutX="257.0" layoutY="79.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="85.0" styleClass="btnInputSearch" text="pesquisar" />
+   </children>
+</AnchorPane>

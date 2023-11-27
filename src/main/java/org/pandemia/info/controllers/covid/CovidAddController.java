@@ -1,21 +1,21 @@
 package org.pandemia.info.controllers.covid;
 
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.util.Callback;
 import javafx.util.StringConverter;
+import org.pandemia.info.ISearch;
 import org.pandemia.info.PandemicApplication;
+import org.pandemia.info.SearchComponent;
 import org.pandemia.info.Utils;
 import org.pandemia.info.database.models.CovidCase;
 import org.pandemia.info.database.models.Neighborhood;
 import org.pandemia.info.database.models.User;
 import org.pandemia.info.database.models.enums.CaseStatus;
-
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class CovidAddController implements Initializable {
@@ -27,13 +27,14 @@ public class CovidAddController implements Initializable {
     public TextArea inputSymptoms;
     public Button btnRegister;
     public AnchorPane body;
+    public Button btnSearch;
 
     public ScrollPane searchArea;
     public ListView<User> searchList;
     public ChoiceBox<Neighborhood> neighborhood;
 
-    private User selectedUser;
     private CovidCase covidCase;
+    private SearchComponent<User> searchComponent;
 
     public CovidAddController() {
         covidCase = new CovidCase();
@@ -45,38 +46,15 @@ public class CovidAddController implements Initializable {
         neighborhood.getItems().setAll(new Neighborhood().findAll(Neighborhood.class));
         neighborhood.setValue(neighborhood.getItems().get(0));
 
-        body.getChildren().forEach(this::closeOnClick);
-        closeOnClick(body);
-
-        inputName.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue)
-                searchArea.setVisible(true);
-        });
-
-        inputName.setOnKeyPressed(e -> searchList.getItems().setAll(User.searchByName(inputName.getText())));
-
-        searchList.setOnMouseClicked(e -> {
-            User user = searchList.getSelectionModel().getSelectedItem();
-            if (user == null) return;
-            inputName.setText(user.getName());
-            searchArea.setVisible(false);
-            selectedUser = user;
-        });
-
-        searchList.setCellFactory(new Callback<>() {
+        searchComponent = new SearchComponent<>(btnSearch, body, inputName, searchArea, searchList, new ISearch<User>() {
             @Override
-            public ListCell<User> call(ListView<User> param) {
-                return new ListCell<>() {
-                    @Override
-                    protected void updateItem(User item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (item != null && !empty) {
-                            setText(item.getName() + " (" + item.getEmail() + ")");
-                        } else {
-                            setText(null);
-                        }
-                    }
-                };
+            public List<User> find(String search) {
+                return User.searchByName(search);
+            }
+
+            @Override
+            public String text(User user) {
+                return user.getName() + " (" + user.getEmail() + ")";
             }
         });
 
@@ -109,17 +87,10 @@ public class CovidAddController implements Initializable {
         btnRegister.setOnAction(e -> btnRegisterAction(true));
     }
 
-    private void closeOnClick(Node node) {
-        node.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, e -> {
-            if (e.getSource() != inputName && e.getSource() != searchList && e.getSource() != searchArea)
-                searchArea.setVisible(false);
-        });
-    }
-
 
     public void btnRegisterAction(boolean redirect) {
 
-        if (selectedUser == null || inputDate.getValue() == null || inputSymptoms.getText().isEmpty() || status.getValue() == null || neighborhood.getValue() == null) {
+        if (searchComponent.getSelected() == null || inputDate.getValue() == null || inputSymptoms.getText().isEmpty() || status.getValue() == null || neighborhood.getValue() == null) {
             Utils.showAlert("Erro", "Erro ao cadastrar caso", "Preencha todos os campos", Alert.AlertType.ERROR);
         } else {
 
@@ -129,8 +100,8 @@ public class CovidAddController implements Initializable {
             covidCase.setStatus(status.getValue());
             covidCase.setIn_quarantine(inputQuarantine.isSelected());
             covidCase.setNeighborhood(neighborhood.getValue());
-            covidCase.setUser(selectedUser);
-            selectedUser.addCovidCase(covidCase);
+            covidCase.setUser(searchComponent.getSelected());
+            searchComponent.getSelected().addCovidCase(covidCase);
 
             Utils.showAlert("Sucesso", "Caso salvo com sucesso", "O caso foi salvo com sucesso", Alert.AlertType.INFORMATION);
 
@@ -144,12 +115,11 @@ public class CovidAddController implements Initializable {
         this.covidCase = covidCase;
         LocalDate localDate = LocalDate.parse(covidCase.getCase_date());
 
-        inputName.setText(covidCase.getUser().getName());
         inputDate.setValue(localDate);
         inputSymptoms.setText(covidCase.getSymptoms());
         status.setValue(covidCase.getStatus());
         inputQuarantine.setSelected(covidCase.isIn_quarantine());
         neighborhood.setValue(covidCase.getNeighborhood());
-        selectedUser = covidCase.getUser();
+        searchComponent.setSelected(covidCase.getUser());
     }
 }

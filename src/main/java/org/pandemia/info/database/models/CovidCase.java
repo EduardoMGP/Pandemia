@@ -17,11 +17,11 @@ public class CovidCase extends CovidCaseDAO {
     private int id;
 
     @JoinColumn(name = "neighborhood_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Neighborhood neighborhood;
 
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private User user;
 
     @Column(nullable = false, columnDefinition = "DATE NOT NULL")

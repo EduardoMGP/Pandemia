@@ -15,6 +15,8 @@ public class CovidCaseDAO extends DAOMySql {
         return entityManager.createQuery(
                         """
                                 SELECT c FROM CovidCase c
+                                INNER JOIN Neighborhood n ON c.neighborhood.id = n.id
+                                JOIN FETCH c.neighborhood
                                 WHERE c.case_date BETWEEN :date AND :date1
                                 AND c.status IN ('confirmed', 'deceased')
                                 ORDER BY c.case_date ASC

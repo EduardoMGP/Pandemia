@@ -25,37 +25,20 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        btnCovid.setOnAction(event -> {
-            PandemicApplication.openPage("covid/add");
-        });
-        btnListCovid.setOnAction(event -> {
-            PandemicApplication.openPage("covid/list");
-        });
 
-        btnVacineApplied.setOnAction(event -> {
-            PandemicApplication.openPage("vaccine/applied/add");
-        });
-        btnVaccine.setOnAction(event -> {
-            PandemicApplication.openPage("vaccine/add");
-        });
-        btnListVaccines.setOnAction(event -> {
-            PandemicApplication.openPage("vaccine/list");
-        });
-        btnListVacineApplied.setOnAction(event -> {
-            PandemicApplication.openPage("vaccine/applied/list");
-        });
+        btnCovid.setOnAction(event -> PandemicApplication.openPage("covid/add"));
+        btnListCovid.setOnAction(event -> PandemicApplication.openPage("covid/list"));
 
-        btnNeighborhood.setOnAction(event -> {
-            PandemicApplication.openPage("neighborhood/add");
-        });
-        btnListNeighborhood.setOnAction(event -> {
-            PandemicApplication.openPage("neighborhood/list");
-        });
-        btnResidents.setOnAction(event -> {
-            PandemicApplication.openPage("resident/add");
-        });
-        btnListResidents.setOnAction(event -> {
-            PandemicApplication.openPage("resident/list");
-        });
+        btnVaccine.setOnAction(event -> PandemicApplication.openPage("vaccine/add"));
+        btnListVaccines.setOnAction(event -> PandemicApplication.openPage("vaccine/list"));
+        btnVacineApplied.setOnAction(event -> PandemicApplication.openPage("vaccine/applied/add"));
+        btnListVacineApplied.setOnAction(event -> PandemicApplication.openPage("vaccine/applied/list"));
+
+        btnNeighborhood.setOnAction(event -> PandemicApplication.openPage("neighborhood/add"));
+        btnListNeighborhood.setOnAction(event -> PandemicApplication.openPage("neighborhood/list"));
+
+        btnResidents.setOnAction(event -> PandemicApplication.openPage("resident/add"));
+        btnListResidents.setOnAction(event -> PandemicApplication.openPage("resident/list"));
+
     }
 }

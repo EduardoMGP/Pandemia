@@ -13,7 +13,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
-public class VaccineController implements Initializable {
+public class VaccineAddController implements Initializable {
 
     public TextField inputName;
     public TextField inputManufacturer;
@@ -28,6 +28,7 @@ public class VaccineController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.vaccine = new Vaccine();
+        this.btnRegister.setOnAction(e -> btnRegisterAction(true));
     }
 
     public void btnRegisterAction(boolean redirect) {
@@ -49,6 +50,9 @@ public class VaccineController implements Initializable {
         this.vaccine.setFabrication_date(this.inputFabrication.getValue().toString());
         this.vaccine.setExpiration_date(this.inputExpiration.getValue().toString());
         this.vaccine.save();
+
+        Utils.showAlert("Sucesso", "Vacina cadastrada com sucesso", "Vacina cadastrada com sucesso", Alert.AlertType.INFORMATION);
+
         if (redirect) {
             PandemicApplication.openPage("vaccine/list");
         }
