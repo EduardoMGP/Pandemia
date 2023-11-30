@@ -63,6 +63,5 @@
             <Image url="@../images/icons8-casa-94.png" />
          </image>
       </ImageView>
-      <Hyperlink fx:id="report" layoutX="559.0" layoutY="18.0" text="Gerar relatorio de casos de covid-19" />
     </children>
 </AnchorPane>

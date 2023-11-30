@@ -6,6 +6,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import org.pandemia.info.PandemicApplication;
 import org.pandemia.info.database.models.User;
+import org.pandemia.info.database.models.enums.Role;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -37,15 +38,24 @@ public class AuthController {
 
     public void register() {
         try {
-            User.register(email.getText(), password.getText(), name.getText());
+            User user = User.register(email.getText(), password.getText(), name.getText());
+            PandemicApplication.setUser(user);
+            PandemicApplication.navigate("index");
+            PandemicApplication.openPage(user.getRole() == Role.ADMIN ? "dashboard" : "covid/view");
         } catch (Exception e) {
             alert(e.getMessage());
         }
     }
 
     public void login() {
-        if (!User.validate(email.getText(), password.getText()))
+        User user = User.validate(email.getText(), password.getText());
+        if (user == null)
             alert("Usuário ou senha incorretos!");
+        else {
+            PandemicApplication.setUser(user);
+            PandemicApplication.navigate("index");
+            PandemicApplication.openPage(user.getRole() == Role.ADMIN ? "dashboard" : "covid/view");
+        }
     }
 
     private void alert(String message) {

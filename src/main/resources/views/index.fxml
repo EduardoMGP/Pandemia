@@ -9,7 +9,7 @@
    <children>
       <Pane maxHeight="200.0" maxWidth="800.0" minHeight="46.0" minWidth="800.0" prefHeight="46.0" prefWidth="800.0">
          <children>
-            <Label alignment="TOP_CENTER" contentDisplay="TOP" layoutX="14.0" layoutY="13.0" prefHeight="17.0" prefWidth="63.0" style="-fx-background-color: #55c96f; -fx-background-radius: 5px; -fx-padding: 2px;" text="Morador" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" />
+            <Label alignment="TOP_CENTER" contentDisplay="TOP" layoutX="14.0" layoutY="13.0" prefHeight="17.0" prefWidth="63.0" style="-fx-background-color: #55c96f; -fx-background-radius: 5px; -fx-padding: 2px;" text="Morador" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP" fx:id="badge" />
             <Hyperlink layoutX="99.0" layoutY="12.0" onAction="#openCovidCases" text="Casos de Covid-19" />
             <Hyperlink layoutX="215.0" layoutY="12.0" onAction="#openVaccinationStatistics" text="Estatistica de vacinação" />
             <Hyperlink layoutX="721.0" layoutY="12.0" onAction="#logout" text="sair">

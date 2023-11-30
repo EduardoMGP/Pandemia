@@ -8,6 +8,7 @@ import org.pandemia.info.database.models.Vaccine;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class VaccineDAO extends DAOMySql {
 
@@ -94,5 +95,6 @@ public class VaccineDAO extends DAOMySql {
                                 """, Vaccine.class)
                 .getResultList();
     }
+
 
 }

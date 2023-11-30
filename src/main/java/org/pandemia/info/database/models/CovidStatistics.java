@@ -4,11 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Immutable;
-import org.pandemia.info.database.dao.CovidCaseDAO;
-import org.pandemia.info.database.dao.CovidCountDAO;
+import org.pandemia.info.database.dao.CovidStatisticsDAO;
 
 import java.util.Date;
-import java.util.List;
 
 @Getter
 @Setter
@@ -23,7 +21,7 @@ import java.util.List;
                         """,
                 resultSetMapping = "CovidByDateMapping"
         ),
-        @NamedNativeQuery(name = "getCasesCount",
+        @NamedNativeQuery(name = "getCasesStatistics",
                 query = """
                          SELECT
                              COALESCE((SELECT COUNT(*) AS cases FROM covid_cases WHERE status = 'confirmed'), 0) AS confirmed_total,
@@ -44,7 +42,7 @@ import java.util.List;
                 @SqlResultSetMapping(
                         name = "CovidByDateMapping",
                         classes = @ConstructorResult(
-                                targetClass = CovidCount.class,
+                                targetClass = CovidStatistics.class,
                                 columns = {
                                         @ColumnResult(name = "confirmed", type = Integer.class),
                                         @ColumnResult(name = "date", type = Date.class),
@@ -54,7 +52,7 @@ import java.util.List;
                 @SqlResultSetMapping(
                         name = "CovidDataStatisticsMapping",
                         classes = @ConstructorResult(
-                                targetClass = CovidCount.class,
+                                targetClass = CovidStatistics.class,
                                 columns = {
                                         @ColumnResult(name = "confirmed_total", type = Integer.class),
                                         @ColumnResult(name = "deceased_total", type = Integer.class),
@@ -69,7 +67,7 @@ import java.util.List;
 )
 @Entity
 @Immutable
-public class CovidCount extends CovidCountDAO {
+public class CovidStatistics extends CovidStatisticsDAO {
 
     @Id
     private int id;
@@ -82,10 +80,10 @@ public class CovidCount extends CovidCountDAO {
     private int deceased;
     private Date date;
 
-    public CovidCount() {
+    public CovidStatistics() {
     }
 
-    public CovidCount(int confirmed_total, int deceased_total, int confirmed, int suspect, int recovered, int deceased) {
+    public CovidStatistics(int confirmed_total, int deceased_total, int confirmed, int suspect, int recovered, int deceased) {
         this.confirmed_total = confirmed_total;
         this.deceased_total = deceased_total;
         this.confirmed = confirmed;
@@ -94,7 +92,7 @@ public class CovidCount extends CovidCountDAO {
         this.deceased = deceased;
     }
 
-    public CovidCount(int confirmed, Date date) {
+    public CovidStatistics(int confirmed, Date date) {
         this.confirmed = confirmed;
         this.date = date;
     }

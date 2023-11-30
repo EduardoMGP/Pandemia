@@ -46,7 +46,7 @@ public class CovidAddController implements Initializable {
         neighborhood.getItems().setAll(new Neighborhood().findAll(Neighborhood.class));
         neighborhood.setValue(neighborhood.getItems().get(0));
 
-        searchComponent = new SearchComponent<>(btnSearch, body, inputName, searchArea, searchList, new ISearch<User>() {
+        searchComponent = new SearchComponent<>(btnSearch, body, inputName, searchArea, searchList, new ISearch<>() {
             @Override
             public List<User> find(String search) {
                 return User.searchByName(search);

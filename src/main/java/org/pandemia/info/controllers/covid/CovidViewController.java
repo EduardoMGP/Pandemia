@@ -10,7 +10,7 @@ import javafx.scene.web.WebView;
 import org.pandemia.info.PandemicApplication;
 import org.pandemia.info.Utils;
 import org.pandemia.info.database.models.CovidCase;
-import org.pandemia.info.database.models.CovidCount;
+import org.pandemia.info.database.models.CovidStatistics;
 import org.pandemia.info.database.models.Neighborhood;
 
 import java.net.URL;
@@ -34,9 +34,9 @@ public class CovidViewController implements Initializable {
     }
 
     public void graph() {
-        List<CovidCount> cases = CovidCount.getCountBetweenDates(Utils.nowDecrementedFormat(30), Utils.formatNowDate());
+        List<CovidStatistics> cases = CovidStatistics.getStatisticsBetweenDates(Utils.nowDecrementedFormat(30), Utils.formatNowDate());
         XYChart.Series<String, Integer> series = new XYChart.Series<>();
-        for (CovidCount covidCount : cases)
+        for (CovidStatistics covidCount : cases)
             series.getData().add(new XYChart.Data<>(Utils.formatDate(covidCount.getDate()), covidCount.getConfirmed()));
         chart.getData().add(series);
 
@@ -65,7 +65,7 @@ public class CovidViewController implements Initializable {
 
     public void cards() {
 
-        CovidCount count = CovidCount.getCasesCount(Utils.nowDecrementedFormat(30), Utils.formatNowDate());
+        CovidStatistics count = CovidStatistics.getCasesStatistics(Utils.nowDecrementedFormat(30), Utils.formatNowDate());
 
         confirmedTotal.setText(String.valueOf(count.getConfirmed_total()));
         confirmed.setText("+" + count.getConfirmed());

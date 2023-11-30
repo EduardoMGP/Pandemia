@@ -3,8 +3,6 @@ package org.pandemia.info.database.dao;
 
 import jakarta.persistence.EntityManager;
 import org.pandemia.info.database.ConnectionJPA;
-import org.pandemia.info.database.models.CovidCase;
-import org.pandemia.info.database.models.CovidCount;
 import org.pandemia.info.database.models.Neighborhood;
 
 import java.util.List;

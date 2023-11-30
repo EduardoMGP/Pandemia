@@ -10,7 +10,6 @@ import org.pandemia.info.database.models.User;
 import org.pandemia.info.database.models.enums.Role;
 
 import java.net.URL;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -66,12 +65,13 @@ public class ResidentAddController implements Initializable {
 
     public void btnRegisterAction(boolean redirect) {
         if (
-                this.user == null
-                        || this.selectNeighborhood.getValue() == null
-                        || this.selectRole.getValue() == null
-                        || this.inputName.getText().isEmpty()
-                        || this.inputEmail.getText().isEmpty()
-                        || (this.user == null && this.inputPassword.getText().isEmpty())
+                this.user == null && (
+                        this.selectNeighborhood.getValue() == null
+                                || this.selectRole.getValue() == null
+                                || this.inputName.getText().isEmpty()
+                                || this.inputEmail.getText().isEmpty()
+                                || (this.user == null && this.inputPassword.getText().isEmpty())
+                )
         ) {
             Utils.showAlert("Erro", "Erro ao cadastrar usuário", "Preencha todos os campos", Alert.AlertType.ERROR);
         } else if (!this.inputEmail.getText().matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {

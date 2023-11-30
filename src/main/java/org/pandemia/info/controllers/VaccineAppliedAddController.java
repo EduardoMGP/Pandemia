@@ -65,13 +65,6 @@ public class VaccineAppliedAddController implements Initializable {
         });
     }
 
-    private void closeOnClick(Node node) {
-        node.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, e -> {
-            if (e.getSource() != inputName && e.getSource() != searchList && e.getSource() != searchArea)
-                searchArea.setVisible(false);
-        });
-    }
-
     public void btnRegisterAction(boolean redirect) {
         if (
                 vaccine.getValue() == null

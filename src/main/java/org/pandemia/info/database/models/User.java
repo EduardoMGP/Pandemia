@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.pandemia.info.PandemicApplication;
 import org.pandemia.info.database.dao.UserDAO;
 import org.pandemia.info.database.models.enums.Role;
+
 import java.util.List;
 
 @Getter
@@ -68,17 +69,16 @@ public class User extends UserDAO {
         this.role = role;
     }
 
-    public static boolean validate(String email, String password) {
+    public static User validate(String email, String password) {
 
         User user = new UserDAO().findByEmail(email);
         if (user == null)
-            return false;
+            return null;
 
-        PandemicApplication.setUser(user);
-        return user.getPassword().equals(password);
+        return user.getPassword().equals(password) ? user : null;
     }
 
-    public static boolean register(String email, String password, String name) {
+    public static User register(String email, String password, String name) {
 
         if (email == null || password == null || name == null)
             throw new RuntimeException("Campos obrigatórios não preenchidos!");
@@ -107,9 +107,7 @@ public class User extends UserDAO {
 
         user = new User(name, email, password, Role.RESIDENT);
         user.save();
-        PandemicApplication.setUser(user);
-
-        return true;
+        return user;
     }
 
     public void addCovidCase(CovidCase covidCase) {

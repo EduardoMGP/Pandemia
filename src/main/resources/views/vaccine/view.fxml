@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.scene.web.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="views.vaccine.View"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane fx:id="viewPage" maxHeight="1165.0" maxWidth="780.0" minHeight="609.0" minWidth="780.0" prefHeight="609.0" prefWidth="780.0" styleClass="body" stylesheets="@../../styles/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.pandemia.info.controllers.VaccineViewController">
+    <children>
+        <Label layoutX="24.0" layoutY="24.0" text="Estatisticas de vacinação">
+            <font>
+                <Font name="Corbel Light" size="20.0" />
+            </font>
+        </Label>
+        <Label layoutX="24.0" layoutY="66.0" prefHeight="35.0" prefWidth="269.0" text="Vacinas aplicadas">
+            <font>
+                <Font name="Corbel Light" size="20.0" />
+            </font>
+        </Label>
+      <PieChart fx:id="chart" layoutX="24.0" layoutY="101.0" prefHeight="400.0" prefWidth="543.0" />
+      <Pane fx:id="legend" layoutX="566.0" layoutY="101.0" prefHeight="400.0" prefWidth="200.0" />
+    </children>
 </AnchorPane>

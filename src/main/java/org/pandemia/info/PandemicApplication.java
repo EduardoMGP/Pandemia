@@ -26,24 +26,13 @@ public class PandemicApplication extends Application {
 
     public static void setUser(User user) {
         PandemicApplication.user = user;
-
-        try {
-            URL page = user == null ? PandemicApplication.class.getResource("/views/auth/login.fxml") : PandemicApplication.class.getResource("/views/index.fxml");
-            if (page == null) throw new IOException("Page not found");
-            scene.setRoot(FXMLLoader.load(page));
-            if (user != null && (user.getRole() == Role.NURSE || user.getRole() == Role.ADMIN))
-                openPage("dashboard");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
     }
 
     public static void navigate(String pageName) {
         try {
             if (scene != null) {
 
-                if (pageName.equals("login") || pageName.equals("register")) {
+                if (pageName.equals("auth/login") || pageName.equals("auth/register")) {
                     if (user != null) return;
                 } else if (user == null)
                     pageName = "auth/login";
