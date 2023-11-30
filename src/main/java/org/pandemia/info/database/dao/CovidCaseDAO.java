@@ -5,13 +5,14 @@ import jakarta.persistence.EntityManager;
 import org.pandemia.info.database.ConnectionJPA;
 import org.pandemia.info.database.models.CovidCase;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CovidCaseDAO extends DAOMySql {
 
     public static List<CovidCase> getCasesBetweenDate(String date, String date1) {
         EntityManager entityManager = ConnectionJPA.entityManager();
-        if (entityManager == null) return null;
+        if (entityManager == null) return new ArrayList<>();
         return entityManager.createQuery(
                         """
                                 SELECT c FROM CovidCase c
@@ -27,7 +28,7 @@ public class CovidCaseDAO extends DAOMySql {
 
     public static List<CovidCase> getAllCases(int page, int pageSize, String searchTerm) {
         EntityManager entityManager = ConnectionJPA.entityManager();
-        if (entityManager == null) return null;
+        if (entityManager == null) return new ArrayList<>();
         return entityManager.createQuery(
                         """
                                 SELECT c FROM CovidCase c

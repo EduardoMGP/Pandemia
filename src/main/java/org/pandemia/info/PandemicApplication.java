@@ -8,8 +8,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.stage.Stage;
 import org.pandemia.info.database.ConnectionJPA;
 import org.pandemia.info.database.models.User;
-import org.pandemia.info.database.models.enums.Role;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.logging.Logger;
